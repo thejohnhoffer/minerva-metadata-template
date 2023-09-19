@@ -1,0 +1,97 @@
+﻿Minerva Title,Sampe Name,Barcode,Race,Hispanic,Ashkenazi Jewish,Age at Donation,Age Diagnosed with Breast Cancer,Biopsy Results,Breast Cancer,History of Other Cancers,BRCA1,BRCA2,Relative with Breast/Ovarian Cancer,Hormone Replacement Therapy,Hysterectomy or Ovary Removal,Age at First Period,Live Births,Menstrual Status,Cigarettes Per Day,Drinks Per Week,Years Smoking,Breast Biopsy,Tested for Genetic Risk,Currently Smoke,Drinks Per Week Current Age,Currently Drink,Years Drinking
+CK1 (BRCA wildtype),CK1,K102583,White,No,No,27,,,No,,No,No,No,No,No,12,,Pre-menopausal,1 to 10,1 to 6,5,No,No,Yes,,Yes,12
+CK10 (BRCA wildtype),CK10,K106697,White,No,No,39,,,No,,N/A,N/A,Yes,No,No,12,2,Pre-menopausal,1 to 10,1 to 6,5,No,No,No,,Yes,18
+CK11 (BRCA wildtype),CK11,K105864,White,No,No,50,,,No,,N/A,N/A,No,No,No,12,3,Post-menopausal,N/A,1 to 6,,No,No,No,>1,Yes,31
+CK12 (BRCA wildtype),CK12,K105652,White,No,No,32,,,No,,N/A,N/A,Yes,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,>1,Yes,11
+CK13 (BRCA wildtype),CK13,K104402,White,No,Yes,50,,Fibrocystic changes,No,,No,No,Yes,No,No,13,1,Pre-menopausal,N/A,N/A,,No,No,No,>1,No,
+CK14 (BRCA wildtype),CK14,K105966,White,No,No,31,,,No,,N/A,N/A,Yes,No,No,14,,Pre-menopausal,N/A,1 to 6,,No,No,No,7 to 14,Yes,11
+CK15 (BRCA wildtype),CK15,K105245,White,No,No,43,,,No,,N/A,N/A,Yes,No,No,12,3,Pre-menopausal,N/A,1 to 6,,No,No,No,7 to 14,Yes,20
+CK16 (BRCA wildtype),CK16,K105282,White,No,Unknown,40,,,No,,N/A,N/A,Yes,Yes,No,14,3,Post-menopausal,11 to 20,1 to 6,20,No,No,No,1 to 6,Yes,19
+CK17_M (BRCA wildtype),CCK17-M,K105697,White,No,No,43,,,No,,N/A,N/A,No,No,No,11,3,Pre-menopausal,1 to 10,1 to 6,6,No,No,No,7 to 14,Yes,20
+CK2 (BRCA wildtype),CK2,K104420,White,No,No,39,,,No,,No,No,No,No,No,13,2,Pre-menopausal,N/A,1 to 6,,No,No,No,>1,Yes,35
+CK3_R (BRCA wildtype),CK3-R,K106710,White,No,No,47,,Fibroadenoma,No,,N/A,N/A,Yes,No,Yes,11,0,Pre-menopausal,N/A,1 to 6,,Yes,No,No,,No,
+CK4_P (BRCA wildtype),CK4-P,K106802,African American,No,No,50,,Normal,No,,No,No,No,Yes,No,12,2,Post-menopausal,,,,Yes,No,No,,No,
+CK4_R (BRCA wildtype),CK4-R,K105772,White,No,No,48,,,No,,N/A,N/A,Yes,No,Yes,14,1,Post-menopausal,N/A,N/A,,No,No,No,,No,
+CK5 (BRCA wildtype),CK5,K104779,White,No,No,24,,,No,,No,No,Yes,No,No,13,,Pre-menopausal,N/A,1 to 6,,No,No,No,7 to 14,Yes,5
+CK6 (BRCA wildtype),CK6,K104276,White,No,No,22,,,No,,No,No,No,No,No,13,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,5
+CK7 (BRCA wildtype),CK7,K104587,White,No,No,34,,,No,,No,No,No,No,No,12,1,Pre-menopausal,1 to 10,1 to 6,6,No,No,No,1 to 6,Yes,15
+CK8 (BRCA wildtype),CK8,K102574,White,No,No,25,,,No,,No,No,No,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,4
+CK9 (BRCA wildtype),CK9,K104712,White,No,No,41,,,No,,No,No,Yes,Yes,Yes,12,4,Post-menopausal,11 to 20,1 to 6,25,No,No,No,,Yes,20
+K1 (BRCA mutant),K1,K104149,White,No,No,29,,,No,,No,No,Yes,No,No,12,,Pre-menopausal,N/A,N/A,,No,No,No,,No,
+K10 (BRCA mutant),K10,K106590,White,No,No,39,,,No,,N/A,Yes,Yes,No,Yes,15,2,Pre-menopausal,N/A,1 to 6,,No,Yes,No,1 to 6,Yes,17
+K11 (BRCA mutant),K11,K106766,White,No,No,47,,,No,,Yes,N/A,Yes,Yes,Yes,11,7,Post-menopausal,N/A,1 to 6,,No,Yes,No,,Yes,29
+K12 (BRCA mutant),K12,K106776,White,Yes,No,31,,Fibrocystic changes,No,,Yes,Yes,Yes,No,No,12,,Pre-menopausal,1 to 10,7 to 14,5,Yes,Yes,No,,Yes,13
+K13 (BRCA mutant),K13,K106976,White,No,No,50,,,No,,No,Yes,Yes,No,No,14,1,Pre-menopausal,,,,No,Yes,No,,No,
+K14 (BRCA mutant),K14,K106977,White,No,No,32,,,No,,No,Yes,Yes,No,No,13,,Pre-menopausal,,,,No,Yes,No,N/A,No,
+K15 (BRCA mutant),K15,K106978,White,No,No,42,,,No,,No,Yes,Yes,No,Yes,16,3,Post-menopausal,,,,No,Yes,No,,No,
+K16 (BRCA mutant),K16,K107119,White,No,No,38,,,No,Cervical cancer,No,No,Yes,No,Yes,9,3,Post-menopausal,,,,No,No,No,,No,
+K17 (BRCA mutant),K17,K107795,White,No,No,44,,I don't know,No,,No,Yes,Yes,No,Yes,14,3,Post-menopausal,,< 1,,Yes,Yes,No,1 to 6,Yes,25
+K18 (BRCA mutant),K18,K107872,White,No,Yes,52,,Normal; I don't know,Yes,Breast cancer,Yes,Yes,Yes,No,No,14,2,Post-menopausal,,,,Yes,Yes,No,7 to 14,No,
+K19 (BRCA mutant),K19,K107874,White,No,No,32,,Invasive Breast Cancer,Yes,Breast cancer,No,Yes,No,No,Yes,9,3,Uterine Ablation,,,,Yes,Yes,No,>1,No,
+K2 (BRCA mutant),K2,K105061,White,No,No,40,,,No,,N/A,N/A,Yes,No,Yes,14,2,Pre-menopausal,1 to 10,1 to 6,5,No,No,No,7 to 14,Yes,20
+K20 (BRCA mutant),K20,K107875,White,No,No,28,,,No,,Yes,No,Yes,No,No,11,,Pre-menopausal,,< 1,,No,Yes,No,,Yes,9
+K21 (BRCA mutant),K21,K108030,White,No,Yes,34,,Fibroadenoma; I don't know,No,,Yes,No,Yes,No,No,11,,Pre-menopausal,,1 to 6,,Yes,Yes,No,,Yes,16
+K22 (BRCA mutant),K22,K108032,White,No,No,37,,,No,,No,Yes,Yes,No,No,13,4,Pre-menopausal,,< 1,,No,Yes,No,>1,Yes,15
+K23 (BRCA mutant),K23,K108034,White,No,No,41,,,No,Thyroid cancer,Yes,No,Yes,No,No,14,3,Pre-menopausal,,,,No,Yes,No,>1,No,
+K24 (BRCA mutant),K24,K108158,White,No,No,45,,,No,,Yes,No,Yes,No,Yes,12,2,Uterine Ablation,,,,No,Yes,No,>1,No,
+K26 (BRCA mutant),K26,K108759,White,No,No,19,,,No,,Yes,No,Yes,No,No,11,,Pre-menopausal,,,,No,Yes,,N/A,No,
+K27 (BRCA mutant),K27,K108800,White,Yes,No,22,,,No,,Yes,No,Yes,No,No,13,,Pre-menopausal,1 to 10,,6,No,Yes,No,>1,No,
+K3 (BRCA mutant),K3,K105343,African American,No,No,46,,,No,,N/A,N/A,Yes,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,20
+K4 (BRCA mutant),K4,K105592,African American,No,No,47,,Atypical hyperplasia,No,,N/A,N/A,Yes,No,Yes,13,1,Post-menopausal,N/A,1 to 6,,Yes,Yes,No,,Yes,20
+K5 (BRCA mutant),K5,K106071,White,No,No,24,,,No,,N/A,N/A,Yes,No,No,12,,Pre-menopausal,N/A,7 to 14,,No,No,No,7 to 14,Yes,6
+K6 (BRCA mutant),K6,K106180,White,No,N/A,23,,,N/A,,Yes,N/A,N/A,N/A,No,-1,,Pre-menopausal,N/A,1 to 6,,No,Yes,No,,Yes,5
+K7 (BRCA mutant),K7,K106467,White,No,Yes,33,,,No,,N/A,Yes,Yes,No,No,12,1,Pre-menopausal,1 to 10,N/A,10,No,Yes,No,>1,No,
+K8 (BRCA mutant),K8,K106560,White,No,No,29,,,No,,Yes,N/A,Yes,No,No,12,,Pre-menopausal,N/A,N/A,,No,Yes,No,1 to 6,No,
+K9 (BRCA mutant),K9,K106588,White,No,No,45,,,No,,N/A,Yes,Yes,Yes,Yes,13,5,Post-menopausal,N/A,1 to 6,,No,Yes,No,,Yes,20
+,C2K6,K104176,White,No,No,22,,,No,,No,No,Yes,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,4
+,CK24,K104182,,,,,,,,,,,,,,11,,,,,,,,,>1,,
+,CK24,K104182,White,No,No,44,,,No,,No,No,No,Yes,Yes,13,2,Post-menopausal,N/A,1 to 6,,No,No,No,,Yes,20
+,C2K15,K104224,White,No,No,42,,,No,,No,No,Yes,No,No,10,2,Pre-menopausal,1 to 10,N/A,22,No,No,Yes,,No,
+,C2K1,K104260,White,No,No,27,,,No,,No,No,Yes,No,No,13,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,6
+,C2K14,K104313,White,Yes,No,32,,,No,,No,No,Yes,No,No,14,,Pre-menopausal,1 to 10,1 to 6,10,No,No,Yes,,Yes,11
+,C2K9,K104403,White,No,No,46,,,No,,No,No,Yes,No,Yes,14,2,Post-menopausal,N/A,1 to 6,,No,No,No,,Yes,20
+,C2K21-1,K104655,White,No,Yes,35,,,No,,No,No,Yes,No,No,10,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,14
+,CK19-BCC2,K104681,White,No,No,32,,,No,,No,No,Yes,No,Yes,12,3,Post-menopausal,N/A,N/A,,No,No,No,,No,
+,CK23,K104772,White,No,No,41,,,No,,No,No,Yes,No,No,11,3,Pre-menopausal,1 to 10,1 to 6,20,No,No,Yes,,Yes,20
+,C3K22-1,K104776,,,,,,,,,,,,,,13,,,,,,,,,>1,,
+,C3K22-1,K104776,White,No,No,41,,,No,,No,No,Yes,No,No,13,2,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,20
+,CSK8,K104978,,,,,,,,,,,,,,12,,,,,,,,,1 to 6,,
+,CSK8,K104978,White,No,No,26,,Fibroadenoma,No,,No,No,Yes,No,No,14,,Pre-menopausal,N/A,1 to 6,,Yes,No,No,,Yes,8
+,C2K24,K105014,,,,,,,,,,,,,,10,,,,,,,,,1 to 6,,
+,C2K24,K105014,White,No,,44,,,No,,No,No,No,No,,11,2,Post-menopausal,N/A,1 to 6,,No,No,No,,Yes,26
+,CK19-BCC,K105131,,,,,,,,,,,,,,13,,,,,,,,,1 to 6,,
+,CK19-BCC,K105131,White,No,No,52,,,No,,N/A,N/A,No,No,Yes,12,2,Post-menopausal,N/A,1 to 6,,No,No,No,,Yes,25
+,C2K23,K105152,White,No,No,42,,Other,No,,N/A,N/A,Yes,No,No,11,2,Pre-menopausal,N/A,N/A,,Yes,No,No,,No,
+,CK21,K105254,White,No,No,32,,,No,,N/A,N/A,No,No,No,11,0,Pre-menopausal,N/A,N/A,,No,No,No,,No,
+,CK21,K105254,,,,,,,,,,,,,,13,,,,,,,,,N/A,,
+,C2K27,K105273,White,No,No,21,,,No,,N/A,N/A,Yes,No,No,14,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,3
+,CK26-2,K105469,White,No,No,19,,,No,,N/A,N/A,No,No,No,12,,Pre-menopausal,N/A,N/A,,No,No,No,,No,
+,C2K25-1,K105496,African American,No,No,48,,,No,,N/A,N/A,No,No,No,13,0,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,31
+,C2K21-2,K105553,White,Yes,No,34,,,No,,N/A,N/A,No,No,No,14,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,18
+,C2K22,K105630,White,Yes,No,39,,,No,,N/A,N/A,No,No,No,16,2,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,15
+,C2K12-2,K105661,White,Yes,No,35,,,No,,N/A,N/A,No,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,14
+,C2K12-2,K105661,,,,,,,,,,,,,,11,,,,,,,,,>1,,
+,CK20,K105767,White,No,No,28,,,No,,N/A,N/A,Yes,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,7
+,CK18-P,K105851,White,No,No,56,42,I don't know,Yes,Breast cancer,N/A,N/A,No,No,No,16,,Post-menopausal,1 to 10,1 to 6,5,Yes,No,No,,Yes,25
+,newK21,K105986,White,No,No,34,,,No,,N/A,N/A,No,No,No,10,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,10
+,CK25-R,K106021,White,No,Unknown,50,,,No,,N/A,N/A,No,No,N/A,13,,Pre-menopausal,11 to 20,7 to 14,25,No,No,No,,Yes,35
+,CK25-R,K106021,,,,,,,,,,,,,,13,,,,,,,,,7 to 14,,
+,CK27,K106022,White,No,No,22,,,No,,N/A,N/A,No,No,No,14,,Pre-menopausal,N/A,N/A,,No,No,No,,No,
+,C2K5,K106043,White,No,No,23,,,No,,N/A,N/A,Yes,No,No,14,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,5
+,CSK7,K106070,White,No,No,35,,,No,,N/A,N/A,Yes,No,No,12,1,Pre-menopausal,1 to 10,1 to 6,4,No,No,No,,Yes,15
+,CK22,K106107,White,No,No,37,,,No,,N/A,N/A,Yes,No,No,12,4,Pre-menopausal,1 to 10,1 to 6,16,No,No,Yes,,Yes,20
+,CK26-2,K106135,White,No,No,19,,,No,,N/A,N/A,Yes,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,3
+,C2K10,K106157,,,,,,,,,,,,,,9,,,,,,,,,N/A,,
+,C2K10,K106157,White,No,No,32,,,No,,N/A,N/A,No,No,No,9,2,Pre-menopausal,N/A,N/A,,No,No,No,,No,
+,2CK2,K106455,,,,,,,,,,,,,,10,,,,,,,,,>1,,
+,2CK2,K106455,White,No,No,38,,,No,,N/A,N/A,Yes,No,No,11,2,Pre-menopausal,1 to 10,1 to 6,10,No,No,No,,Yes,17
+,C2K10,K106486,,,,,,,,,,,,,,12,,,,,,,,,>1,,
+,C2K10,K106486,White,No,No,35,,,No,,N/A,N/A,No,No,No,12,2,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,13
+,C2K20,K106585,White,No,No,27,,,No,,N/A,N/A,Yes,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,9
+,C2K11,K106597,,,,,,,,,,,,,,14,,,,,,,,,N/A,,
+,C2K11,K106597,White,No,Yes,50,,,No,,N/A,N/A,Yes,No,Yes,17,2,Post-menopausal,11 to 20,N/A,20,No,No,Yes,,No,
+,C2K12-1,K106757,White,No,No,31,,,No,,N/A,N/A,Yes,No,No,12,,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,11
+,C2K22-2,K106772,,,,,,,,,,,,,,13,,,,,,,,,1 to 6,,
+,C2K22-2,K106772,White,Yes,No,41,,,No,,N/A,N/A,No,No,No,13,2,Pre-menopausal,N/A,1 to 6,,No,No,No,,Yes,20
+,K25,K108301,Native American / Alaskan,No,No,50,,,No,,Yes,Yes,Yes,No,No,13,0,Pre-menopausal,,< 1,,No,Yes,No,,Yes,20
+,K25,K108301,,,,,,,,,,,,,,13,,,,,,,,,>1,,
