@@ -1,16 +1,27 @@
 import os
 import csv
+import json
+import urllib.request
+from pathlib import Path
 
 CITATION = 'Gray GK, Li CM-C, Rosenbluth JM, et al.,  Developmental Cell, 2022. DOI: 10.1016/j.devcel.2022.05.003.'
-KEY_MAP = {
+KEY_NORMALIZE = {
     'Drinks Per Week': 'Drinks Per Week Current Age',
     'Sample Name': 'Sampe Name',
     'BRCA1-mutant': 'BRCA1',
     'BRCA2-mutant': 'BRCA2',
 }
+# Map Sample names to story urls
+SAMPLE_NORMALIZE = {
+    'CCK17-M': 'CK17-M',
+}
+STORY_NORMALIZE = {
+    'CK19_BCC': 'Ck19_BCC',
+    'CK22': 'Ck22'
+}
 
 def read_k(row, k):
-    v = row[KEY_MAP.get(k,k)]
+    v = row[KEY_NORMALIZE.get(k,k)]
     # Check for "don't know" in the column
     if v.find('don\'t know') != -1:
         return ''
@@ -38,7 +49,7 @@ def to_key_csv(row, ks):
 
 def format_field(meta, k, default=''):
     v = meta.get(k, default) or default
-    return f'**{k}**: {v}'
+    return f'**{k}**: {v}  '
 
 def format_field_if(meta, k):
     if meta[k] == '': return ''
@@ -46,7 +57,6 @@ def format_field_if(meta, k):
 {format_field(meta, k)}'''
 
 def format_row(meta):
-    print(list(meta.keys()))
     identifiers = meta['Identifiers']
     formated_ids = [format_field(identifiers, i) for i in identifiers.keys()]
     serialized_ids = '\n'.join(formated_ids)
@@ -83,16 +93,16 @@ def format_row(meta):
 {format_field(meta, 'Currently Drink', 'Unknown')}
 {format_field(meta, 'Drinks Per Week', 'Unknown')}
 
-### Imaging  
-{format_field(meta, 'Imaging Assay Type')}
-{format_field(meta, 'Fixative Type')}
-
 ### Attribution {attribution}
 
 ### Sample Identifiers  
 {serialized_ids}'''
 
-def parse_row(row):
+# ### Imaging  
+# {format_field(meta, 'Imaging Assay Type')}
+# {format_field(meta, 'Fixative Type')}
+
+def parse_row(row, sample_name):
     return {
 #Diagnosis
         'Biopsy Results': read_k(row, 'Biopsy Results'),
@@ -128,7 +138,7 @@ def parse_row(row):
         'Please cite the publication and underlying data as': CITATION,
 #Identifiers
         'Identifiers': {
-            'Sample Name': read_k(row, 'Sample Name')
+            'Sample Name': sample_name 
         }
     }
 
@@ -142,18 +152,47 @@ def parse_metas(in_csv):
     out_metas = dict()
     for row in parse_csv(in_csv):
         k = 'Sample Name'
-        sample_name = read_k(row, k) 
+
+        # Sanitize sample name
+        sample_name = SAMPLE_NORMALIZE.get(read_k(row, k), read_k(row, k))
+        story_sample_name = sample_name.replace('-', '_')
+
+        # Sanitize Minerva Path
+        minerva_path = STORY_NORMALIZE.get(story_sample_name, story_sample_name)
+
+        # Ensure there exists minerva title
         minerva_title = read_k(row, 'Minerva Title')
-        meta_md = format_row(parse_row(row))
-        out_metas[sample_name] = {
+        minerva_title = minerva_title if minerva_title else minerva_path 
+
+        meta_md = format_row(parse_row(row, sample_name))
+        out_metas[minerva_path] = {
             'meta_md': meta_md,
             'minerva_title': minerva_title
         }
 
     return out_metas
 
-def main(in_list, in_csv):
+def edit_exhibit(full_url, minerva_title, description):
+    # Parse json at full_url
+    with urllib.request.urlopen(full_url) as url:
+        data = json.loads(url.read().decode('utf-8'))
+
+    data['Name'] = minerva_title
+    data['Header'] = description 
+    data['FirstViewport'] = {
+        'Pan': [0.5, 0.5],
+        'Zoom': 1.0
+    }
+    # Return new exhibit
+    return data
+
+
+def main(in_list, in_csv, output_dir):
     metas = parse_metas(in_csv)
+
+    sample_names = []
+    ex = 'exhibit.json'
+
     with open(in_list, 'r') as inf:
         for line in inf:
             full_url = line.strip()
@@ -163,11 +202,38 @@ def main(in_list, in_csv):
             if not full_url.startswith('http'):
                 continue
             sample_name = full_url.split('/')[-2]
+            # Ignore any sample names not in metas
+            if sample_name not in metas: continue
+            
+            # append sample name to list of sample names
+            sample_names.append(sample_name)
+            # add full url to metas dictionary
+            metas[sample_name]['full_url'] = full_url 
 
-    for meta in metas.values():
-        print(meta['meta_md'])
+    # Ensure metas.keys intersects with sample names
+    meta_keys = set(sample_names) & set(metas.keys())
+    meta_keys = [k for k in meta_keys if 'full_url' in metas[k]]
+
+    # Edit all exhibit.json files
+    for key in meta_keys:
+        full_url = metas[key]['full_url']
+        minerva_title = metas[key]['minerva_title']
+        description = metas[key]['meta_md']
+
+        # Create new exhibit json
+        new_exhibit = edit_exhibit(full_url, minerva_title, description)
+        key_output_dir = os.path.join(output_dir, key)
+        key_output = os.path.join(key_output_dir, ex)
+
+        # Create new directory, key_output_dir
+        Path(key_output_dir).mkdir(parents=True, exist_ok=True)
+
+        with open(key_output, 'w') as outfile:
+            json.dump(new_exhibit, outfile, indent=4)
+
 
 if __name__ == "__main__":
     in_list = os.path.join(os.path.dirname(__file__), "inputs", "links.txt")
     in_csv = os.path.join(os.path.dirname(__file__), "inputs", "komen.csv")
-    main(in_list, in_csv)
+    output_dir = os.path.join(os.path.dirname(__file__), "outputs")
+    main(in_list, in_csv, output_dir)
