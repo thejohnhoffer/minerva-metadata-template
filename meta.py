@@ -3,41 +3,9 @@ import csv
 import json
 import urllib.request
 from pathlib import Path
-
-CITATION = 'Gray GK, Li CM-C, Rosenbluth JM, et al.,  Developmental Cell, 2022. DOI: 10.1016/j.devcel.2022.05.003.'
-KEY_NORMALIZE = {
-    'Drinks Per Week': 'Drinks Per Week Current Age',
-    'Sample Name': 'Sampe Name',
-    'BRCA1-mutant': 'BRCA1',
-    'BRCA2-mutant': 'BRCA2',
-}
-# Map Sample names to story urls
-SAMPLE_NORMALIZE = {
-    'CCK17-M': 'CK17-M',
-}
-STORY_NORMALIZE = {
-    'CK19_BCC': 'Ck19_BCC',
-    'CK22': 'Ck22'
-}
-
-def read_k(row, k):
-    v = row[KEY_NORMALIZE.get(k,k)]
-    # Check for "don't know" in the column
-    if v.find('don\'t know') != -1:
-        return ''
-    return v
-
-def is_na(row, k):
-    v = read_k(row, k)
-    return v == 'N/A'
-
-def is_true(row, k):
-    v = read_k(row, k)
-    if v == 'Yes' or v == 'yes':
-        return True
-    if v == 'True' or v == 'true':
-        return True
-    return False
+from sanitization import to_normalized_sample_name
+from sanitization import sample_name_to_s3_subpath
+from sanitization import is_true, is_na, read_k
 
 def to_key_csv(row, ks):
     not_applicable = [k for k in ks if is_na(row, k)]
@@ -98,11 +66,12 @@ def format_row(meta):
 ### Sample Identifiers  
 {serialized_ids}'''
 
+# TODO: confirm
 # ### Imaging  
 # {format_field(meta, 'Imaging Assay Type')}
 # {format_field(meta, 'Fixative Type')}
 
-def parse_row(row, sample_name):
+def parse_row(row, sample_name, citation):
     return {
 #Diagnosis
         'Biopsy Results': read_k(row, 'Biopsy Results'),
@@ -135,7 +104,7 @@ def parse_row(row, sample_name):
         'Imaging Assay Type': 't-CyCIF',
         'Fixative Type': 'FFPE',
 #Attribution
-        'Please cite the publication and underlying data as': CITATION,
+        'Please cite the publication and underlying data as': citation,
 #Identifiers
         'Identifiers': {
             'Sample Name': sample_name 
@@ -143,39 +112,44 @@ def parse_row(row, sample_name):
     }
 
 def parse_csv(in_csv):
+    # Exported from Excel with BOM
     with open(in_csv, 'r', encoding='utf-8-sig') as inf:
         reader = csv.DictReader(inf)
         for row in reader:
             yield row
 
-def parse_metas(in_csv):
+def parse_metas(in_csv, citation):
     out_metas = dict()
     for row in parse_csv(in_csv):
-        k = 'Sample Name'
 
-        # Sanitize sample name
-        sample_name = SAMPLE_NORMALIZE.get(read_k(row, k), read_k(row, k))
-        story_sample_name = sample_name.replace('-', '_')
-
-        # Sanitize Minerva Path
-        minerva_path = STORY_NORMALIZE.get(story_sample_name, story_sample_name)
+        # Sanitize sample name and convert to s3 subpath
+        sample_name = to_normalized_sample_name(row)
+        s3_subpath = sample_name_to_s3_subpath(sample_name)
 
         # Ensure there exists minerva title
         minerva_title = read_k(row, 'Minerva Title')
-        minerva_title = minerva_title if minerva_title else minerva_path 
+        minerva_title = minerva_title if minerva_title else s3_subpath 
 
-        meta_md = format_row(parse_row(row, sample_name))
-        out_metas[minerva_path] = {
+        meta_md = format_row(parse_row(row, sample_name, citation))
+        out_metas[s3_subpath] = {
             'meta_md': meta_md,
             'minerva_title': minerva_title
         }
 
     return out_metas
 
-def edit_exhibit(full_url, minerva_title, description):
+def edit_exhibit(full_url, minerva_title, description, orig, ex):
     # Parse json at full_url
     with urllib.request.urlopen(full_url) as url:
         data = json.loads(url.read().decode('utf-8'))
+
+        # Backup copy of original data
+        out_dir = full_url.split('/')[-2]
+        out_dir = os.path.join(orig, full_url.split('/')[-2])
+        original_out = os.path.join(out_dir, ex)
+        Path(out_dir).mkdir(parents=True, exist_ok=True)
+        with open(original_out, 'w') as outfile:
+            json.dump(data, outfile, indent=4)
 
     data['Name'] = minerva_title
     data['Header'] = description 
@@ -187,8 +161,8 @@ def edit_exhibit(full_url, minerva_title, description):
     return data
 
 
-def main(in_list, in_csv, output_dir):
-    metas = parse_metas(in_csv)
+def main(in_list, in_csv, output_dir, orig, s3_prefix, citation):
+    metas = parse_metas(in_csv, citation)
 
     sample_names = []
     ex = 'exhibit.json'
@@ -197,7 +171,7 @@ def main(in_list, in_csv, output_dir):
         for line in inf:
             full_url = line.strip()
             # Ensure path ends with exhibit.json
-            if not full_url.endswith('exhibit.json'):
+            if not full_url.endswith(ex):
                 continue
             if not full_url.startswith('http'):
                 continue
@@ -214,6 +188,9 @@ def main(in_list, in_csv, output_dir):
     meta_keys = set(sample_names) & set(metas.keys())
     meta_keys = [k for k in meta_keys if 'full_url' in metas[k]]
 
+    # Ensure each metas.keys matches s3 prefix
+    meta_keys = [k for k in meta_keys if s3_prefix in metas[k]['full_url']]
+
     # Edit all exhibit.json files
     for key in meta_keys:
         full_url = metas[key]['full_url']
@@ -221,7 +198,7 @@ def main(in_list, in_csv, output_dir):
         description = metas[key]['meta_md']
 
         # Create new exhibit json
-        new_exhibit = edit_exhibit(full_url, minerva_title, description)
+        new_exhibit = edit_exhibit(full_url, minerva_title, description, orig, ex)
         key_output_dir = os.path.join(output_dir, key)
         key_output = os.path.join(key_output_dir, ex)
 
@@ -231,9 +208,16 @@ def main(in_list, in_csv, output_dir):
         with open(key_output, 'w') as outfile:
             json.dump(new_exhibit, outfile, indent=4)
 
+        out_sample = full_url.split('/')[-2]
+        print(f'aws s3 cp --acl public-read {key_output} s3://{s3_prefix}/{out_sample}/{ex}', flush=True)
 
+
+# Modify parameters as needed
 if __name__ == "__main__":
+    s3_prefix = 'www.cycif.org/110-Komen_BRCA'
+    citation = 'Gray GK, Li CM-C, Rosenbluth JM, et al.,  Developmental Cell, 2022. DOI: 10.1016/j.devcel.2022.05.003.'
     in_list = os.path.join(os.path.dirname(__file__), "inputs", "links.txt")
-    in_csv = os.path.join(os.path.dirname(__file__), "inputs", "komen.csv")
+    in_csv = os.path.join(os.path.dirname(__file__), "inputs", "source.csv")
     output_dir = os.path.join(os.path.dirname(__file__), "outputs")
-    main(in_list, in_csv, output_dir)
+    orig = os.path.join(os.path.dirname(__file__), "originals")
+    main(in_list, in_csv, output_dir, orig, s3_prefix, citation)
