@@ -1,6 +1,6 @@
 ## Using meta.py
 
-This script and example `inputs` embeded metadata for the following paper:
+This script and example `inputs` have embeded metadata for the following paper:
 
 ```
 Gray GK, Li CM-C, Rosenbluth JM, et al.,  Developmental Cell, 2022. DOI: 10.1016/j.devcel.2022.05.003.
